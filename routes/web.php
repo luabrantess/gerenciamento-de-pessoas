@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstagiarioController;
-use App\Http\Controllers\ListaEstagiario;
+use App\Http\Controllers\ListaEstagiariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +15,14 @@ use App\Http\Controllers\ListaEstagiario;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/create', function () {
+    return view('estagiario');
 });
 
-Route::view('/estagios', 'estagios');
+Route::get('', function () {
+    return view('estagiarios');
+});
 
 Route::post('/estagiario', [EstagiarioController::class, 'store'])->name('estagiario.store');
 
-Route::get('/estagiarios', [ListaEstagiario::class], 'store')->name('get.store');
+Route::get('/estagiarios', [ListaEstagiariosController::class, 'index'])->name('estagiarios.index');

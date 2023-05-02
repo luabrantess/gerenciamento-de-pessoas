@@ -7,6 +7,8 @@
     <title>Lista de estagiário</title>
 </head>
 <body>
+
+    
     <div>
         <div class="top w-full bg-[#FCFC30] ">
             <img src="logo.png" class="w-1/6"/> 
@@ -14,9 +16,9 @@
         <div class="form p-2 ">
             <div class="flex">
                 <h2 class="font-bold p-4">Lista de estagiários</h2>
-                <button class="bg-[#002D4B] text-white font-bold rounded p-2 mx-2 my-3 ml-auto" onclick="location.href='{{ url('/') }}'">Cadastrar novo</button>
+                <button class="bg-[#002D4B] text-white font-bold rounded p-2 mx-2 my-3 ml-auto" onclick="location.href='{{ url('/create') }}'">Cadastrar novo</button>
             </div>
-            <div class="lista p-4 border-2">
+            <form class="lista p-4 border-2">
                 <div class="labels grid text-center grid-cols-3">
                     <label>Nome completo</label>
                     <label>Email</label>
@@ -31,7 +33,7 @@
                     <input class="bg-gray-50 outline-0 p-2 "/>
                     <input class="bg-gray-50 outline-0 p-2 "/>
                 </div>
-            </div>
+</form>
 
         </div>
 
