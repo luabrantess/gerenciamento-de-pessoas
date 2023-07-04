@@ -23,9 +23,10 @@ return new class extends Migration
             $table->string('cnpj_faculdade');
             $table->string('curso');
             $table->date('expectativa_formacao');
-            $table->string('termo_assinado');
+            $table->string('termo_assinado')->nullable();
             $table->date('inicio_contrato');
             $table->date('fim_contrato');
+            $table->boolean('ativo')->default(true);
         });
     }
 
