@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EstagiarioController;
+use App\Http\Controllers\FeriasEstagiarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FipEstagiarioController;
 
@@ -17,26 +18,31 @@ use App\Http\Controllers\FipEstagiarioController;
 
 // Lista de estagiários cadastrados no sistema
 Route::get('/', [EstagiarioController::class, 'index'])->name('estagiario.index');
+Route::get('/inativos', [EstagiarioController::class, 'inativos'])->name('estagiario.inativos');
+Route::get('/ferias', [FeriasEstagiarioController::class, 'ferias'])->name('estagiario.ferias');
 
 // Abre a página de formulário para cadastrar um novo estagiário
-Route::get('/create', [EstagiarioController::class, 'create'])->name('estagiario.create');
+Route::get('/estagio/create', [EstagiarioController::class, 'create'])->name('estagiario.create');
 
 // Função que grava no banco de dados o novo estagiário
-Route::post('/post/estagiario', [EstagiarioController::class, 'store'])->name('estagiario.store');
+Route::post('/estagiario/post/estagiario', [EstagiarioController::class, 'store'])->name('estagiario.store');
 
 // Abre a página de formulário de edição do estagiário
-Route::get('/edit/{estagiario}', [EstagiarioController::class, 'edit'])->name('estagiario.edit');
+Route::get('/estagiario/edit/{estagiario}', [EstagiarioController::class, 'edit'])->name('estagiario.edit');
 
 // Função que atualiza no banco de dados o estagiário
-Route::put('/update/{estagiario}', [EstagiarioController::class, 'update'])->name('estagiario.update');
+Route::put('/estagiario/update/{estagiario}', [EstagiarioController::class, 'update'])->name('estagiario.update');
 
 // Função que apaga no banco de dados o estagiário
-Route::delete('/delete/{estagiario}', [EstagiarioController::class, 'delete'])->name('estagiario.delete');
+Route::delete('/estagiario/delete/{estagiario}', [EstagiarioController::class, 'delete'])->name('estagiario.delete');
+Route::post('/estagiario/undelete/{estagiario}', [EstagiarioController::class, 'undelete'])->name('estagiario.undelete');
 
 // FIP
 Route::get('/fip/{estagiario}/create', [FipEstagiarioController::class, 'create'])->name('fip.create');
 Route::post('/fip/store', [FipEstagiarioController::class, 'store'])->name('fip.store');
+Route::delete('/fip/delete/{fip}', [FipEstagiarioController::class, 'delete'])->name('fip.delete');
 
-//Contagem
-Route::get('/dias-para-aniversario', [EstagiarioController::class, 'diasParaAniversario'])->name('estagiario.aniversario');
+//FERIAS
+Route::post('/ferias/store', [FeriasEstagiarioController::class, 'store'])->name('ferias.store');
+
 

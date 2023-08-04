@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="grid w-full">
-                    <label class="font-medium">Nome da faculdade</label>
+                    <label class="font-medium">Nome da universidade</label>
                     <input placeholder="" type="text" value="<?php echo e($estagiario->faculdade); ?>" name="faculdade" required
                         class="bg-gray-50 outline-0 rounded shadow p-2" />
                 </div>
@@ -80,7 +80,7 @@
             <div class='grid w-full gap-3'>
 
                 <div class="grid w-full">
-                    <label class="font-medium">CNPJ faculdade</label>
+                    <label class="font-medium">CNPJ universidade</label>
                     <input placeholder="" type="text" name="cnpj_faculdade" value="<?php echo e($estagiario->cnpj_faculdade); ?>" minlength="14" maxlength="14"
                         required class="bg-gray-50 outline-0 rounded shadow p-2" />
                 </div>

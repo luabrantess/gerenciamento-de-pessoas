@@ -4,26 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.6/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('/favicon.png')); ?>" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Lista de estagiário</title>
 </head>
 
 <body>
-    <div class="top w-full bg-[#FCFC30] ">
+    <div class="top w-full bg-[#FCFC30]">
         <a href="/"><img src="<?php echo e(asset('/logo.png')); ?>" class="w-1/6" /></a>
     </div>
 
     <?php if(session('error')): ?>
-    <div class="alert alert-error">
-        <?php echo e(session('error')); ?>
+        <div class="alert alert-error">
+            <?php echo e(session('error')); ?>
 
-    </div>
+        </div>
     <?php elseif(session('success')): ?>
-    <div class="alert alert-success">
-        <?php echo e(session('success')); ?>
+        <div class="alert alert-success">
+            <?php echo e(session('success')); ?>
 
-    </div>
+        </div>
     <?php endif; ?>
 
     <?php echo e($slot); ?>
