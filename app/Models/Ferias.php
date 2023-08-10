@@ -13,15 +13,7 @@ class FeriasEstagiario extends Model
 
     use HasFactory;
 
-    /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('mes');
-        });
-    }
+
 
     public function estagiario(): BelongsTo
     {

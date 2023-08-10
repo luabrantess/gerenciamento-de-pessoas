@@ -19,7 +19,7 @@ use App\Http\Controllers\FipEstagiarioController;
 // Lista de estagiários cadastrados no sistema
 Route::get('/', [EstagiarioController::class, 'index'])->name('estagiario.index');
 Route::get('/inativos', [EstagiarioController::class, 'inativos'])->name('estagiario.inativos');
-Route::get('/ferias', [FeriasEstagiarioController::class, 'ferias'])->name('estagiario.ferias');
+
 
 // Abre a página de formulário para cadastrar um novo estagiário
 Route::get('/estagio/create', [EstagiarioController::class, 'create'])->name('estagiario.create');
@@ -43,6 +43,7 @@ Route::post('/fip/store', [FipEstagiarioController::class, 'store'])->name('fip.
 Route::delete('/fip/delete/{fip}', [FipEstagiarioController::class, 'delete'])->name('fip.delete');
 
 //FERIAS
-Route::post('/ferias/store', [FeriasEstagiarioController::class, 'store'])->name('ferias.store');
+Route::get('/ferias/{estagiario}', [FeriasEstagiarioController::class, 'ferias'])->name('estagiario.ferias');
+Route::post('/ferias/{estagiario}/store', [FeriasEstagiarioController::class, 'store'])->name('ferias.store');
 
 

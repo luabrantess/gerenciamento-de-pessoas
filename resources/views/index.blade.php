@@ -1,48 +1,38 @@
-<x-layout>
+<x-layout class="">
 
     <div>
-
-        <div class="form p-2 ">
-        
-
-
-        <div class="navbar bg-base-100">
-            <div class="navbar-start">
-                <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                </label>
+        <div class="form p-2">
+            <div class="navbar bg-base-100 mt-5 mb-3 ">
+                <div class="flex-1">
+                    <div class="grid">
+                    <a class=" normal-case text-xl font-medium text-[#002D4B]">Gerenciamento de cadastro de Estagiários</a>
+                    <a class=" normal-case text-2xl font-bold text-[#002D4B]">Lista de Estagiários</a>
+                
+                    </div>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">Lista de Estagiários</a>
-            </div>
-            <div class="navbar-end">
-                <a class="btn" href="{{ route('estagiario.create') }}">Cadastrar novo</a>
-            </div>
-            </div>
+                <div class="flex-none gap-2">
+                  <div class="form-control">
+                    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                  </div>
 
-            @if (session()->has('message'))
-            <div class="alert alert-success">
-                @if(is_array(session('message')))
-                    <ul>
-                        @foreach (session('message') as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                @else
-                    {{ session('message') }}
-                @endif
-            </div>
-            @endif
+                  
+                    <div class="gap-2 justify-end bg-gray-200 rounded p-3">
+                        <a class=" font-medium p-1 text-[#002D4B] bg-white" href="{{ route('estagiario.inativos') }}">Inativos</a>
+                        <a class="font-medium p-1  text-[#002D4B] bg-white" href="{{ route('estagiario.create') }}">Cadastrar novo</a>
+                    </div>
+            
+                  
+                </div>
+              </div>
+            
 
-            <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+            <div class="overflow-x-auto p-2">
+                <table class=" table w-full border-2 rounded ">
                     <!-- head -->
-                    <thead>
+                    <thead class="bg-gray-200 rounded-t-full text-lg text-[#002D4B] font-bold">
                         <tr>
-
                             <th>Nome</th>
-                            <th>Faculdade</th>
-                            <th>Curso</th>
+                            <th>Formação</th>
                             <th>Contrato</th>
                             <th>Aniversário</th>
                             <th>Ações</th>
@@ -55,141 +45,199 @@
                         @endphp
 
                         @foreach ($estagiarios as $estagiario)
-
-                        
                             <tr>
-                                
                                 <th>
-
                                     <!-- The button to open modal -->
-                                    <label for="modal-detalhe-estagiario-{{ $estagiario->id }}" class="btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 inline">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
-                                        </svg>
-
+                                    <label for="modal-detalhe-estagiario-{{ $estagiario->id }}" class="btn bg-white  border-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 mr-2" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
+                                          
                                         {{ $estagiario->nome }}
                                     </label>
 
                                 </th>
-                                <td>{{ $estagiario->faculdade }}</td>
-                                <td>{{ $estagiario->curso }}</td>
-                                <td>De {{ date( 'd/m/Y' , strtotime($estagiario->inicio_contrato)) }} a
-                                {{ date( 'd/m/Y' , strtotime($estagiario->fim_contrato)) }} </td>
-
+                                <td class="my-auto ">
+                                    <h1 class="font-bold text-lg">{{ $estagiario->faculdade }}</h1>
+                                    <h3 class="font-medium text-sm">{{ $estagiario->curso }}</h3>
+                                </td>
+        
+                                <td class="">
+                                    <h1 class="font-medium text-sm">De {{ date('d/m/Y', strtotime($estagiario->inicio_contrato)) }} a
+                                        {{ date('d/m/Y', strtotime($estagiario->fim_contrato)) }} </h1>
+                    
+                                </td>
+                                
                                 @php
                                     $aniversario = Carbon\Carbon::create($estagiario->nascimento)->setYear(date('Y'));
                                     $proximo_aniversario = $aniversario->isFuture() ? $aniversario : $aniversario->addYear();
                                     $falta_quanto = $proximo_aniversario->diffForHumans();
                                 @endphp
 
-
-                                <td>{{ Carbon\Carbon::create($estagiario->nascimento)->format('d/m') }} ({{ $falta_quanto }})</td>
-                                
                                 <td>
-                                <details class="dropdown dropdown-left dropdown-end p-3">
-                                    <summary class="m-1 btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-                                    </svg>
-                                    </summary>
-                                    
-                                    <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                                        <li><a href="{{ route('fip.create', $estagiario->id) }}">Adicionar FIP</a></li>
-                                        <li><a href="{{ route('estagiario.edit', $estagiario->id) }}">Editar estagiário</a></li>
-                                        <li><label for="modal-deletar-usuario-{{$estagiario->id}}">
-                                        Excluir estagiário
-                                    </label></li>
-                                    </ul>
-                                </details>
+                                    <h1 class="font-medium text-sm">
+                                        {{ Carbon\Carbon::create($estagiario->nascimento)->format('d/m') }}
+                                    ({{ $falta_quanto }})
+                                    </h1>
+                                </td>
+
+                                <td >
+                                    <details class="dropdown dropdown-left dropdown-end p-6">
+                                        <summary class="btn m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                                            </svg>
+                                        </summary>
+
+                                        <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-1 shadow">
+                                            <li>
+                                                <li>
+                                                    <label for="modal-fip-usuario-{{ $estagiario->id }}">
+                                                        Adicionar FIP
+                                                    </label>
+                                                </li>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('estagiario.edit', $estagiario->id) }}">Editar estagiário</a>
+                                            </li>
+                                            <li>
+                                                <label for="modal-ferias-usuario-{{ $estagiario->id }}">
+                                                    Planejar férias
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label for="modal-deletar-usuario-{{ $estagiario->id }}">
+                                                    Desativar estagiário
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </details>
 
                                     <!-- Put this part before </body> tag -->
 
-                                    <input type="checkbox" id="modal-deletar-usuario-{{$estagiario->id}}" class="modal-toggle" />
+                                    <input type="checkbox" id="modal-deletar-usuario-{{ $estagiario->id }}" class="modal-toggle" />
 
-                                        <div class="modal">
-                                            <div class="modal-box">
-                                                <h3 class="font-bold text-lg">Excluir</h3>
-                                                <p class="py-4">Tem certeza que deseja desativar o estagiário {{ $estagiario->nome }}?</p>
-                                                <div class="modal-action">
+                                    <div class="modal">
+                                        <div class="modal-box">
+                                            <h3 class="text-lg font-bold">Excluir</h3>
+                                            <p class="py-4">Tem certeza que deseja desativar o estagiário
+                                                {{ $estagiario->nome }}?</p>
+                                            <div class="modal-action">
 
-                                                    <form  action="{{ route('estagiario.delete', $estagiario->id) }}" method="POST">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button class="btn btn-outline btn-success" type="submit">Sim</button>
+                                                <form action="{{ route('estagiario.delete', $estagiario->id) }}" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button class="outline-0 bg-[#002D4B] p-4 w-auto rounded shadow text-white font-medium w-full hover:bg-blue-800" type="submit">Sim</button>
 
-                                                    </form>
-                                                    <label for="modal-deletar-usuario-{{$estagiario->id}}" class="btn">Fechar</label>
-                                                </div>
+                                                </form>
+                                                <label for="modal-deletar-usuario-{{ $estagiario->id }}" class="btn">Fechar</label>
                                             </div>
-                                        </div></li>
-                                    
 
+                                        </div>
+                                    </div>
+
+                                    <input type="checkbox" id="modal-fip-usuario-{{ $estagiario->id }}" class="modal-toggle" />
+
+                                    <div class="modal rounded-xl">
+                                        <div class="modal-box mx-auto my-auto w-full">
+                                            <h3 class="text-lg font-bold">Adicionar FIP para {{$estagiario->nome}}</h3>
+                                            <form action="{{ route('fip.store') }}" enctype="multipart/form-data" method="POST">
+                                            <div class="w-full text-center">
+                                                <input type="hidden" name="estagiario" value="{{ $estagiario->id }}">
+
+                                                
+                                                    
+                                                    @csrf
+                                                    <div class=" my-5 text-center w-full">
+                            
+                                                        <select title="Selecione o mês da FIP" class="select  border-0 bg-gray-100 w-full max-w-xs" name="mes" id="mes">
+                                                            <option disabled selected>Selecione o mês</option>
+                                
+                                                            @foreach (range(0, 23) as $numeroMes) 
+                                                            @php
+                                                                    $data = Carbon\Carbon::parse($estagiario->inicio_contrato)->locale("pt_BR")->addMonth($numeroMes);
+                                                            @endphp    
+                                                            <option value="01-{{ $data->format('m') }}-{{ $data->format('Y') }}">
+                                                                    
+                                                                    {{ ucfirst($data->monthName) }} / {{ $data->format("Y") }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                
+                                                    <div class="my-5 text-center w-full">
+                                                        <input type="file" title="Selecione a FIP assinada" name="fip_assinada" class="file-input file-input-bordered w-full max-w-xs" />
+                                                    </div>
+                                                                                                        
+                                                    <div class="flex justify-center items-center text-center">
+                                                        <button type="submit" class="outline-0 bg-[#002D4B] p-4 w-[70%] rounded shadow text-white font-medium w-[20%] hover:bg-blue-800">Salvar</button>
+                                                                                        
+                                                
+                                                    </div>
+                                                    <label for="modal-fip-usuario-{{ $estagiario->id }}" class="font-medium mt-2 text-center text-lg">Fechar</label>
+
+
+                                                </form>
+                                             
+                                        
+                            
+                                               
+                                            </div>
+                             
+
+                                        </div>
+                                    </div>
+
+                                    <input type="checkbox" id="modal-ferias-usuario-{{ $estagiario->id }}" class="modal-toggle" />
+
+                                    <div class="modal rounded-xl">
+                                        <div class="modal-box mx-auto my-auto w-full">
+                                            <h3 class="text-lg font-bold">Incluir férias para {{$estagiario->nome}}</h3>
+                                            <form action="{{ route('ferias.store', $estagiario->id) }}" enctype="multipart/form-data" method="POST">
+                                            <div class="w-full text-center mt-5">
+                                                <input type="hidden" name="estagiario" value="{{ $estagiario->id }}">                                         
+                                                    @csrf
+                                                    <label class="font-medium ">Inicio das férias</label>
+                                                    <div class="my-2 text-center w-full">
+                                                        
+                                                        <input placeholder="" name="inicio" min="{{ Carbon\Carbon::parse($estagiario->inicio_contrato)->addMonths(4)->format('Y-m-d') }}" max="{{ Carbon\Carbon::parse($estagiario->fim_contrato)->subMonths(1)->format('Y-m-d') }}" type="date" required
+                                                        class="border-0 bg-gray-100 w-full max-w-xs p-4 rounded" title="Escolha a data " value="" />
+                                                    </div>
+                                            
+                                                    <label class="font-medium">Fim das férias</label>
+                                                    <div class="my-2 text-center w-full">
+                                                        
+                                                        <input placeholder="" name="fim" max="2005-12-31" type="date" required
+                                                        class="border-0 bg-gray-100 w-full max-w-xs p-4 rounded" value="{{ Date('Y-m-d', strtotime($estagiario->fim)) }}" />
+                                                    </div>
+                                                                
+                                                    <div class="flex justify-center items-center mt-5 text-center">
+                                                        <button type="submit" class="outline-0 bg-[#002D4B] p-4 w-[70%] rounded shadow text-white font-medium w-[20%] hover:bg-blue-800">Salvar</button>
+                                                                                        
+                                                        
+                                                    </div>
+
+                                                    <label for="modal-ferias-usuario-{{ $estagiario->id }}" class="font-medium mt-2 text-center text-lg">Fechar</label>
+                                                    
+
+
+                                                </form>
+                                             
+                                        
+                            
+                                               
+                                            </div>
+                             
+
+                                        </div>
+                                    </div>
+                                    </li>
                                     <!-- The button to open modal -->
-                                    
                                 </td>
                             </tr>
 
-                            <!-- Put this part before </body> tag -->
-                            <input type="checkbox" id="modal-detalhe-estagiario-{{ $estagiario->id }}"
-                                class="modal-toggle" />
-                            <div class="modal">
-                                <div class="modal-box max-w-5xl">
-                                    <h3 class="font-bold text-lg">{{ $estagiario->nome }} </h3>
-                                    <p class="py-4"><a class="btn btn-sm" target="_blank" href="{{ asset('storage/' . $estagiario->termo_assinado) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline w-5 h-5">
-                                            <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z" clip-rule="evenodd" />
-                                            <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                                          </svg>
-                                          Termo Assinado
-                                        </a></p>
-
-                                    <div class="border-2 rounded mt-2 p-2 space-y-2 grid grid-cols-6">
-                                        <h1 class="font-medium text-xl">Fips assinadas</h1>
-
-                                        @foreach ($estagiario->fips as $fip)
-
-                                        <p class="mt-2 flex w-[90%] gap-5 ">
-                                            <a class="btn w-full" target="_blank" href="{{ asset('storage/' . $fip->fip_assinada) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-                                                  </svg>                                                
-                                                  {{ substr(strftime('%B%Y', strtotime($fip->mes)), 0, 3) }}, {{strftime('%Y')}}
-                                            </a>
-                                        </p>
-
-                                        @endforeach
-                                    </div>
-
-                                    <div class="border-2 rounded  mt-2 p-2" >
-                                        <h1 class="font-medium text-xl">Dados pessoais</h1>
-                                        <p>Data de nascimento: {{ date( 'd/m/Y' , strtotime($estagiario->nascimento))}}</p>
-                                        <p class="">Telefone: {{ $estagiario->telefone }}</p>
-                                        <p class="">CPF: {{ $estagiario->cpf }}</p>
-                                        <p class="">Email: {{ $estagiario->email }}</p>
-                                    </div>
-
-                                    <div class="border-2 rounded  mt-2 p-2" >
-                                        <h1 class="font-medium text-xl">Dados universitários</h1>
-                                        <p class="">Inicio de contrato: {{ date( 'd/m/Y' , strtotime($estagiario->inicio_contrato))}}</p>
-                                        <p class="">Fim de contrato: {{ date( 'd/m/Y' , strtotime($estagiario->fim_contrato))}}</p>
-                                        <p class="">Faculdade: {{ $estagiario->faculdade }}</p>
-                                        <p class="">CNPJ Faculdade: {{ $estagiario->cnpj_faculdade }}</p>
-                                        <p class="">Curso: {{ $estagiario->curso }}</p>
-                                        <p class="">Expectativa de formação: {{ date( 'd/m/Y' , strtotime($estagiario->expectativa_formacao))}}</p>
-                                    </div>
-
-                                    <div class="modal-action">
-                                        <label for="modal-detalhe-estagiario-{{ $estagiario->id }}"
-                                            class="btn">Fechar</label>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-modalEstagiario :estagiario="$estagiario" />
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
 
     </div>
